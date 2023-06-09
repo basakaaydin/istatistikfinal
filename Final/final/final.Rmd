@@ -1,7 +1,7 @@
 ---
-title: "Çalışmanızın Başlığı"
+title: "Yıllık Gelirdeki Farklılıklara Sebep Olan Faktörler"
 author: 
-  - İsim Soyisim[^1]
+  - Başak Aydın[^1]
 bibliography: ../bibliography/biblio.bib
 csl: ../csl/apa-tr.csl
 header-includes:
@@ -34,7 +34,7 @@ knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FAL
 <!-- ======================================================================= -->
 <!-- ============================== NOTLAR ================================= -->
 <!-- ======================================================================= -->
-[^1]: Öğrenci Numarası, [Github Repo](https://github.com/KULLANICI_ADINIZ/REPO_ADINIZ)
+[^1]: 21080560, [Github Repo](https://github.com/basakaaydin/istatistikfinal)
 
 # Final Hakkında Önemli Bilgiler
 
