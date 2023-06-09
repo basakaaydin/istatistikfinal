@@ -119,7 +119,7 @@ adult_data %>%
 
 
 # Sonuç
-Bu bölümde çalışmanızın sonuçlarını özetleyiniz. Sonuçlarınızın başlangıçta belirlediğiniz araştırma sorusuna ne derece cevap verdiğini ve ileride bu çalışmanın nasıl geliştirilebileceğini tartışınız.
+Çalışmama sorum yıllık gelirdeki farklılıkları etkileyen nedir ? Sorusu ile başlamıştım.Yıllık gelirdeki farklılıklara sebep olan birçok faktör var.Ben çalışmamın bu kısmında yaş ve yıllık gelir arasındaki bağı incelemeye çalıştım ve elde ettiğim sonuç bağlamında yaş ve yıllık gelir arasında doğru bir orantı yok.Yani yaş arttıkça deneyim ve gelir artar gibi bir sonuç elde edemeyiz.Bugün bile günümüz dünyasında çok genç ama çok yüksek gelire sahip iş insanları görüyoruz.Dolayısıyla yıllık gelirdeki farklılıklara sebep olan faktörlerden yaş benim çalımamda geliri çok etkileyen bir unsur değil.
 
 **Kaynakça bölümü Rmarkdown tarafından otomatik olarak oluşturulmaktadır. Taslak dosyada Kaynakça kısmında herhangi bir değişikliğe gerek yoktur.** 
 
