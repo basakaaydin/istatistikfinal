@@ -27,9 +27,7 @@ biblio-style: apalike
 abstract: |
   Bu bölümde çalışmanızın özetini yazınız.
 ---
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
-```
+
 
 <!-- ======================================================================= -->
 <!-- ============================== NOTLAR ================================= -->
@@ -68,7 +66,8 @@ Bu bölümde çalışmanızda kullandığınız veri setinin kaynağını, ham v
 
 Analize ait R kodları bu bölümde başlamalıdır. Bu bölümde veri setini R'a aktaran ve özet istatistikleri üreten kodlar yer almalıdır.
 
-```{r}
+
+```r
 library(tidyverse)
 library(here)
 adult_data <- read_csv(here("C:/Users/basak/OneDrive/Masaüstü/istatistikfinal/Final/data/AnyConv.com__adult.data - Kopya (2).csv"))
@@ -76,24 +75,24 @@ adult_data <- read_csv(here("C:/Users/basak/OneDrive/Masaüstü/istatistikfinal/
 
  
 
-```{r, echo=FALSE}
-library(xtable) 
-# devtools::install_github("emraher/summarytools")
-library(summarytools)
-st_options(lang = "tr")
-```
 
 
 
-```{r results='asis', echo=FALSE}
-adult_data %>%
-  select("capital gain", "hours per week", "race", "sex", "yearly income") %>% 
-  descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
-  xtable(caption = "Özet İstatistikler",
-         label = "tab:ozet",
-         align = c("l", "c", "c", "c", "c", "c")) %>% 
-  print(booktabs = TRUE, comment = FALSE, caption.placement = "top")
-```
+
+\begin{table}[ht]
+\centering
+\caption{Özet İstatistikler} 
+\label{tab:ozet}
+\begin{tabular}{lccccc}
+  \toprule
+ & Ortalama & Std.Sap & Min & Medyan & Mak \\ 
+  \midrule
+capital gain & 7663.83 & 422.97 & 1055.00 & 7688.00 & 15024.00 \\ 
+  hours per week & 40.44 & 12.35 & 1.00 & 40.00 & 99.00 \\ 
+  yearly income & 43024.94 & 700.03 & 37000.00 & 43000.00 & 70000.00 \\ 
+   \bottomrule
+\end{tabular}
+\end{table}
 
 
 # Yöntem ve Veri Analizi
@@ -108,7 +107,8 @@ $$
 Bu bölümde analize ilişkin farklı tablolar ve grafiklere yer verilmelidir. Çalışmanıza uygun biçimde histogram, nokta grafiği (Şekil \@ref(fig:plot) gibi), kutu grafiği, vb. grafikleri bu bölüme ekleyiniz. Şekillerinize de gerekli göndermeleri bir önceki cümlede gösterildiği gibi yapınız.
 
 
-```{r plot, fig.align='center', fig.cap='Yıllık Gelir Farklılıkları'}
+
+```r
 adult_data %>% 
   ggplot(aes(x = Age, y = `yearly income`)) +
   geom_point() +
@@ -116,6 +116,15 @@ adult_data %>%
   scale_x_continuous("age") + 
   scale_y_continuous("yearly income")
 ```
+
+\begin{figure}
+
+{\centering \includegraphics{final_files/figure-latex/plot-1} 
+
+}
+
+\caption{Yıllık Gelir Farklılıkları}(\#fig:plot)
+\end{figure}
 
 
 # Sonuç
