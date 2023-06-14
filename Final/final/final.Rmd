@@ -25,7 +25,7 @@ urlcolor: blue
 fontsize: 12pt
 biblio-style: apalike
 abstract: |
-  Bu çalışmada yıllık geliri etkileyen faktörleri ele aldım.Benim veri analizimde üzerinde durduğum konu age ve yearly income arasındaki bağı incelemekti.Çizdirdiğim grafikte de görüldüğü gibi yaş ve yıllık gelir arasında doğru bir orantı yok.Yani yaş,deneyim vs. arttıkça gelir de aynı oranda artar diyemeyiz grafikte de görüldüğü üzere.Çünkü 25 yaş aralığında birçok insan daha yaşlı kesimden daha fazla kazanıyor.Bu bağlamda yıllık gelirdeki farklılıklar sebep olan faktörlerden olan yaş çok büyük bir farklılık yaratmıyor.Bu çalışmamda size göstermek istediğim konu buydu.
+  Yıllık geliri etkileyen ve değişikliklere sebep olan birçok faktör bulunmaktadır.Bunlar;cinsiyet,ırk,yaş,eğitim durumu gibi faktörlerdir.Bu çalışmada UCI Machine Learning Repositery üzerinden alınan veri seti ile yıllık gelir üzerinde farklılıklara sebep olan faktörlerin analiz edilerek ve yorumlanarak incelenmesidir.
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
@@ -101,8 +101,7 @@ Bu bölümde veri setindeki bilgileri kullanarak çalışmanın amacına ulaşma
 $$
 Y_t = \beta_0 + \beta_N N_t + \beta_P P_t + \beta_I I_t + \varepsilon_t
 $$
-
-
+Bu bölümde analize ilişkin farklı tablolar ve grafiklere yer verilmelidir. Çalışmanıza uygun biçimde histogram, nokta grafiği (Şekil \@ref(fig:plot) gibi), kutu grafiği, vb. grafikleri bu bölüme ekleyiniz. Şekillerinize de gerekli göndermeleri bir önceki cümlede gösterildiği gibi yapınız.
 
 
 ```{r plot, fig.align='center', fig.cap='Yıllık Gelir Farklılıkları'}
