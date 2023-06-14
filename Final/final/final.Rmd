@@ -66,13 +66,17 @@ Bu araştırmada yaş,etnik grup,cinsiyet,eğitim,medeni hali gibi değişkenler
 # Veri 
 Veri setimi Ucı machine learning repositoryden alarak excel dosyasına aktardım.Bazı NA gözlemler vardı onları düzenledim ve csv dosyasına dönüştürerek analizime dahil ettim.
 
+Analize ait R kodları bu bölümde başlamalıdır. Bu bölümde veri setini R'a aktaran ve özet istatistikleri üreten kodlar yer almalıdır.
+
+
 ```{r}
 library(tidyverse)
 library(here)
 adult_data <- read_csv(here("C:/Users/basak/OneDrive/Masaüstü/istatistikfinal/Final/data/AnyConv.com__adult.data - Kopya (2).csv"))
 ```
 
- 
+Rmd dosyasında kod bloklarının bazılarında kod seçeneklerinin düzenlendiğine dikkat edin. 
+
 
 ```{r echo=FALSE}
 library(xtable) 
@@ -81,7 +85,7 @@ library(summarytools)
 st_options(lang = "tr")
 ```
 
-
+`echo=FALSE` seçeneği ile kodların türetilen pdf dosyasında görünmesini engelleyin ve sonuçlarınızı tablo halinde rapor edin.
 
 ```{r results='asis', echo=FALSE}
 adult_data %>%
@@ -96,6 +100,7 @@ adult_data %>%
 
 # Yöntem ve Veri Analizi
 Bu bölümde veri setindeki bilgileri kullanarak çalışmanın amacına ulaşmak için kullanılacak yöntemleri açıklayın. Derste işlenen/işlenecek olan analiz yöntemlerinden (Hipotez testleri ve korelasyon analizi gibi) çalışmanın amacına ve veri setine uygun olanlar bu bölümde kullanılmalıdır. [@newbold:2003; @ozsoy:2010; @ozsoy:2014]
+Örneğin, regresyon analizi gerçekleştiriyorsanız tahmin ettiğiniz denklemi bu bölümde tartışınız. Denklemlerinizi ve matematiksel ifadeleri $LaTeX$ kullanarak yazınız.
 
 
 $$
