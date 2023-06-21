@@ -135,8 +135,8 @@ etkiyi ifade ederken, 𝜖𝑖𝑗𝑘 hata terimini açıklamaktadır.
 
 
 ```{r, echo=FALSE}
-install.packages("ggplot2")
-library(ggplot2)
+install.packages("tidyverse")
+library(tidyverse)
 ```
 
 ```{r plot, fig.align='center', fig.cap='Yıllık Gelir ve Yaş Değişkeni Grafiği'}
