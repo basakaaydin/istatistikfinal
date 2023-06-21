@@ -36,3 +36,12 @@
   year={1991},
   publisher={Wiley Online Library}
 }
+@article{birdal2019tuketici,
+  title={T{\"u}ketici Davran{\i}{\c{s}}lar{\i}nda Stat{\"u} Kayg{\i}s{\i} ve Sosyoekonomik Belirleyenleri},
+  author={Birdal, Murat and Serdar, ACUN and Parla, ONUK},
+  journal={Do{\u{g}}u{\c{s}} {\"U}niversitesi Dergisi},
+  volume={20},
+  number={2},
+  pages={15--29},
+  year={2019}
+}

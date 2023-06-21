@@ -25,7 +25,7 @@ urlcolor: blue
 fontsize: 12pt
 biblio-style: apalike
 abstract: |
-  Yıllık geliri etkileyen ve değişikliklere sebep olan birçok faktör bulunmaktadır.Bunlar;cinsiyet,ırk,yaş,eğitim durumu gibi faktörlerdir.Bu çalışmada UCI Machine Learning Repositery üzerinden alınan veri seti ile yıllık gelir üzerinde farklılıklara sebep olan faktörlerin analiz edilerek ve yorumlanarak incelenmesidir.
+  Yıllık geliri etkileyen ve değişikliklere sebep olan birçok faktör bulunmaktadır.Bunlar;cinsiyet,ırk,yaş,eğitim durumu gibi faktörlerdir.Bu çalışmada hem yıllık hem aylık geliri göz önünde bulundurduğumuzda geliri etkileyen yaş faktörü yadsınamaz bir gerçektir.Bu projede UCI Machine Learning Repository sitesinden alınan resmi veriler kullanılarak yıllık geliri etkileyen faktörlerin sonuçlarının tahmin edilip yorumlanması yönünde bir çalışma yapılmıştır..Veri seti üzerinde grafik ve analiz için ufak değişiklikler yapılmıştır.
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
@@ -61,18 +61,21 @@ Bu araştırmada yaş,etnik grup,cinsiyet,eğitim,medeni hali gibi değişkenler
 
 
 # Veri 
-Veri setimi Ucı machine learning repositoryden alarak excel dosyasına aktardım.Bazı NA gözlemler vardı onları düzenledim ve csv dosyasına dönüştürerek analizime dahil ettim.
+Bu çalışmada Barry Becker tarafından 1994 yılında yapılan Nüfus sayımı veritabanından alınan veriler kullanılmıştır.Bu veri seti UCI Machine Learning Repository sitesinde oluşturulmuş bir veri setidir.Veri seti yıllık gelirin bahsedilen yıllarda 42 farklı ülkedeki farklılıklarını gösteren verileri sağlar.Kullanılan veri seti üzerinde grafik analizi için NA gözlemleri kaldırarak ve veri üzerinde ufak düzenlemelerle analiz yapılmıştır.
 
-Analize ait R kodları bu bölümde başlamalıdır. Bu bölümde veri setini R'a aktaran ve özet istatistikleri üreten kodlar yer almalıdır.
+Tablo 1,seçili yıllık gelirlerin 42 ülke için ortalama değerlerini,minimum,medyan ile maksimum değerlerini ve standart sapmalarını göstermektedir.
+
+Tablo 1'de görüldüğü üzere daha öncede bahsedilen ülkelerdeki çalışanların yıllık gelirini incelerken arasındaki ilişkiyi analiz ettiğimiz ''age''(yaş) değişkeni ortalama 38,58'i vermektedir.Özellikle bu yaş ortalamasındaki bireylerin bilgi birikimi ve tecrübe bakımından ileri seviyede olduklarını görüyoruz.Aynı zamanda ortalama yaş 38-39 civarındayken yıllık gelir maksimum 70.000 dolara kadar çıkmaktadır.Bu aykırı gibi gözüken değerler aslında bakıldığında belli bir yaş grubunun yıllık gelir bakımından daha fazla kazandığını, bu bağlamda ''age'' (yaş) değişkeninin yıllık geliri etkileyen bir faktör olduğunu açıkça ortaya koymaktadır. 
+
 
 
 ```{r, echo=FALSE}
 library(tidyverse)
 library(readr)
-veri <- read_csv("C:/Users/BATUEREN/Desktop/alıştırma/AnyConv.com__adult.data - Kopya (2).csv")
+veri <- read_csv("C:/Users/basak/OneDrive/Masaüstü/21080560/Final/data/AnyConv.com__adult.data - Kopya (2).csv")
 ```
 
-Rmd dosyasında kod bloklarının bazılarında kod seçeneklerinin düzenlendiğine dikkat edin. 
+ 
 
 ```{r, echo=FALSE}
 library(xtable) 
@@ -82,11 +85,11 @@ library(tinytex)
 st_options(lang = "tr")
 ```
 
-`echo=FALSE` seçeneği ile kodların türetilen pdf dosyasında görünmesini engelleyin ve sonuçlarınızı tablo halinde rapor edin.
 
-```{r results='asis', echo=FALSE}
+
+```{r echo=FALSE, results='asis'}
 veri %>%
-  select("capital gain", "hours per week", "race", "sex", "yearly income") %>% 
+  select("capital gain", "hours per week", "Age", "sex", "yearly income") %>% 
   descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
   xtable(caption = "Özet İstatistikler",
          label = "tab:ozet",
@@ -96,21 +99,47 @@ veri %>%
 
 
 # Yöntem ve Veri Analizi
-Bu bölümde veri setindeki bilgileri kullanarak çalışmanın amacına ulaşmak için kullanılacak yöntemleri açıklayın. Derste işlenen/işlenecek olan analiz yöntemlerinden (Hipotez testleri ve korelasyon analizi gibi) çalışmanın amacına ve veri setine uygun olanlar bu bölümde kullanılmalıdır. [@newbold:2003; @ozsoy:2010; @ozsoy:2014]
+Şekil 1'de yıllık geliri etkileyen yaş faktörü üzerinden oluşturulan grafikte 30-50 yaş grubu bireylerin yıllık gelirinin daha fazla olduğu görülmüştür.Bu konudaki Doğuş Üniversitesi Dergisinde yayımlanan ''Sosyoekonomik Belirleyenler''başlıklı yazıda da değinildiği gibi yaş değişkeni yıllık gelir üzerinde önemli bir etkiye sahip olduğu görülmüştür.@birdal2019tuketici
 
-Örneğin, regresyon analizi gerçekleştiriyorsanız tahmin ettiğiniz denklemi bu bölümde tartışınız. Denklemlerinizi ve matematiksel ifadeleri $LaTeX$ kullanarak yazınız.
+
+ANOVA (Analysis of Variance), birçok grup arasındaki farkların istatistiksel olarak anlamlı
+olup olmadığını değerlendirmek için kullanılan bir istatistiksel modeldir. Genellikle, gruplar
+arasındaki ortalamaların farklı olup olmadığını belirlemek için kullanılır. ANOVA modeli, bir
+bağımlı değişkenin (genellikle sürekli bir değişken) birden fazla bağımsız değişken tarafından
+etkilendiği durumlar için uygundur. Bu model, gruplar arasındaki farklılıkları, grup içindeki
+değişkenliklerle karşılaştırarak değerlendirir.
+Varyans analizinin uygulanabilmesi için örneklem ana kütlesinin sahip olması gereken bazı
+özellikler bulunmaktadır. Her bir grubun normal dağılım sergilemesi, örneklerin bağımsız ve
+varyanslarının eşit olması istenmektedir. ANOVA analizinde kullanılan F testi hipotezi şöyle
+oluşturulur (Birdal Şenoğlu (2020)):
 
 $$
-Y_t = \beta_0 + \beta_N N_t + \beta_P P_t + \beta_I I_t + \varepsilon_t
+𝐻0
+∶ 𝜇0 = 𝜇2 = 𝜇3 = … =  𝜇N
 $$
 
-Bu bölümde analize ilişkin farklı tablolar ve grafiklere yer verilmelidir. Çalışmanıza uygun biçimde histogram, nokta grafiği (Şekil \@ref(fig:plot) gibi), kutu grafiği, vb. grafikleri bu bölüme ekleyiniz. Şekillerinize de gerekli göndermeleri bir önceki cümlede gösterildiği gibi yapınız.
+Bu denklem bize ortalamalar arasında fark olmadığını göstermektedir. 𝐻1
+ise en az iki ortalama arasında fark olduğunu gösterir. Sonrasında test istatistiği gereklidir. Varyans analizinde
+temel amaç, ikiden fazla örnek için örnek ortalamalarının genel ortalamadan sapmalarının
+kareler toplamını, sapmaya yol açan etkileri ayırmak ve analiz etmektir. İki faktörlü varyans
+analizi modeli şu şekilde gösterilmektedir:
+
+$$
+𝑋𝑖𝑗𝑘 = 𝜇 + 𝛼𝑖 + 𝛽𝑗 + 𝛼𝛽𝑖𝑗 + 𝜖𝑖𝑗𝑘
+
+$$
+Burada 𝜇, genel ortalamayı; 𝛼𝑖
+ilk faktör etkisini; 𝛽𝑗
+ikinci faktörün etkisini ve 𝛼𝛽𝑖𝑗 ortak
+etkiyi ifade ederken, 𝜖𝑖𝑗𝑘 hata terimini açıklamaktadır.
+
 
 ```{r, echo=FALSE}
 install.packages("ggplot2")
+library(ggplot2)
 ```
 
-```{r plot, fig.align='center', fig.cap='Muhteşem Bir Grafik'}
+```{r plot, fig.align='center', fig.cap='Yıllık Gelir ve Yaş Değişkeni Grafiği'}
 veri %>% 
 ggplot(aes(x = Age, y = `yearly income`)) +
   geom_point() +
@@ -121,7 +150,7 @@ ggplot(aes(x = Age, y = `yearly income`)) +
 
 
 # Sonuç
-Bu bölümde çalışmanızın sonuçlarını özetleyiniz. Sonuçlarınızın başlangıçta belirlediğiniz araştırma sorusuna ne derece cevap verdiğini ve ileride bu çalışmanın nasıl geliştirilebileceğini tartışınız.
+Bu yıllık geliri etkileyen sebeplerin başında gelen yaş faktörü aslında insanların yaşamları boyunca bilgi birikimlerinin artması,yaptıkları işlerde ustalaşmasından dolayı yıllık geliri etkileyen faktör olarak süregelmektedir.Bu çalışmada 42 ülkenin yapılan nüfus sayımı veritabanı verileriyle yıllık geliri etkileyen faktörleri tahmin eden en uygun ANOVA modelinin ortaya konması hedeflenmiştir.Bu doğrultuda UCI Machine Learning Repository adlı siteden alınan veriler kullanılmıştır.2 adet grubu olması tek yönlü ANOVA modelinin kullanılmasına karar verilmesine sebep olmuştur.Analizde bu iki grup kıyaslanarak aralarındaki fark detaylandırılmak için Tukey analizinden yardım alınmıştır.Yıllık gelir ile ilgili  farklı eğilimler olabilir.Bunlar çalışanların yaş aldıkça şirketler tarafından tecrübe ve bilgi birikimi bakımından zengin bulunarak daha yüksek bir maaş verilmesi ya da bulundukları şirkette çalıştıkları yıl arttıkça dolayısıyla çalışanların yaşları da artar, bu da aylık maaşlara ve daha sonrasında da yıllık gelire yansıyarak farklılıkları oluşturabilir.Bu unsurlar bize yıllık geliri etkileyen faktör olan yaşın bize yıllık geliri nasıl etkilediği yönünde bilgi vererek analizi tamamlamamıza yardımcı olur.
 
 **Kaynakça bölümü Rmarkdown tarafından otomatik olarak oluşturulmaktadır. Taslak dosyada Kaynakça kısmında herhangi bir değişikliğe gerek yoktur.** 
 
