@@ -72,10 +72,9 @@ Tablo 1'de görüldüğü üzere daha öncede bahsedilen ülkelerdeki çalışan
 ```{r, echo=FALSE}
 library(tidyverse)
 library(readr)
-veri <- read_csv("C:/Users/basak/OneDrive/Masaüstü/21080560/Final/data/AnyConv.com__adult.data - Kopya (2).csv")
+veri <- read_csv("C:/Users/basak/OneDrive/Masaüstü/21080560/Final/data/veri.csv")
 ```
 
- 
 
 ```{r, echo=FALSE}
 library(xtable) 
