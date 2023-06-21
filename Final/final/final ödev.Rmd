@@ -34,10 +34,7 @@ knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FAL
 <!-- ======================================================================= -->
 <!-- ============================== NOTLAR ================================= -->
 <!-- ======================================================================= -->
-[^1]: 21080560, [Github Repo](https://github.com/basakaaydin/istatistikfinal)
-
-
-
+[^1]: Öğrenci Numarası, [Github Repo](https://github.com/basakaaydin/istatistikfinal)
 
 # Giriş
  Yapmış olduğum bu çalışmada araştırma sorum yıllık gelirdeki değişimleri etkileyen faktörler nelerdir sorusuna dayanmaktadır.Bu sorudan yola çıkarak elde ettiğim sonuçların gelir üzerindeki etkisini incelemek ve veriyi analiz etmek projemin konusunu oluşturmaktadır.Araştırmama dair kullandığım veri setini UCI Machine Learning Repository sitesi üzerinden aldım.Bu veri seti nüfus sayımı verilerine dayanarak yıllık gelirin 50.000$'ı aşıp aşmadığını incelemektedir.Veri setim toplam 14 değişken ve 48.842 gözlem içermektedir.Değişkenler age,workclass,fnlwgt,education,education-num,marital-status,occupation,relationship,race,sex,capital gain,capital loss,hours per week,native country'den oluşmaktadır. 
@@ -69,26 +66,26 @@ Veri setimi Ucı machine learning repositoryden alarak excel dosyasına aktardı
 Analize ait R kodları bu bölümde başlamalıdır. Bu bölümde veri setini R'a aktaran ve özet istatistikleri üreten kodlar yer almalıdır.
 
 
-```{r}
+```{r, echo=FALSE}
 library(tidyverse)
-library(here)
-adult_data <- read_csv(here("C:/Users/basak/OneDrive/Masaüstü/istatistikfinal/Final/data/AnyConv.com__adult.data - Kopya (2).csv"))
+library(readr)
+veri <- read_csv("C:/Users/BATUEREN/Desktop/alıştırma/AnyConv.com__adult.data - Kopya (2).csv")
 ```
 
 Rmd dosyasında kod bloklarının bazılarında kod seçeneklerinin düzenlendiğine dikkat edin. 
 
-
-```{r echo=FALSE}
+```{r, echo=FALSE}
 library(xtable) 
 # devtools::install_github("emraher/summarytools")
 library(summarytools)
+library(tinytex)
 st_options(lang = "tr")
 ```
 
 `echo=FALSE` seçeneği ile kodların türetilen pdf dosyasında görünmesini engelleyin ve sonuçlarınızı tablo halinde rapor edin.
 
 ```{r results='asis', echo=FALSE}
-adult_data %>%
+veri %>%
   select("capital gain", "hours per week", "race", "sex", "yearly income") %>% 
   descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
   xtable(caption = "Özet İstatistikler",
@@ -100,18 +97,22 @@ adult_data %>%
 
 # Yöntem ve Veri Analizi
 Bu bölümde veri setindeki bilgileri kullanarak çalışmanın amacına ulaşmak için kullanılacak yöntemleri açıklayın. Derste işlenen/işlenecek olan analiz yöntemlerinden (Hipotez testleri ve korelasyon analizi gibi) çalışmanın amacına ve veri setine uygun olanlar bu bölümde kullanılmalıdır. [@newbold:2003; @ozsoy:2010; @ozsoy:2014]
-Örneğin, regresyon analizi gerçekleştiriyorsanız tahmin ettiğiniz denklemi bu bölümde tartışınız. Denklemlerinizi ve matematiksel ifadeleri $LaTeX$ kullanarak yazınız.
 
+Örneğin, regresyon analizi gerçekleştiriyorsanız tahmin ettiğiniz denklemi bu bölümde tartışınız. Denklemlerinizi ve matematiksel ifadeleri $LaTeX$ kullanarak yazınız.
 
 $$
 Y_t = \beta_0 + \beta_N N_t + \beta_P P_t + \beta_I I_t + \varepsilon_t
 $$
+
 Bu bölümde analize ilişkin farklı tablolar ve grafiklere yer verilmelidir. Çalışmanıza uygun biçimde histogram, nokta grafiği (Şekil \@ref(fig:plot) gibi), kutu grafiği, vb. grafikleri bu bölüme ekleyiniz. Şekillerinize de gerekli göndermeleri bir önceki cümlede gösterildiği gibi yapınız.
 
+```{r, echo=FALSE}
+install.packages("ggplot2")
+```
 
-```{r plot, fig.align='center', fig.cap='Yıllık Gelir Farklılıkları'}
-adult_data %>% 
-  ggplot(aes(x = Age, y = `yearly income`)) +
+```{r plot, fig.align='center', fig.cap='Muhteşem Bir Grafik'}
+veri %>% 
+ggplot(aes(x = Age, y = `yearly income`)) +
   geom_point() +
   geom_smooth() +
   scale_x_continuous("age") + 
@@ -120,7 +121,7 @@ adult_data %>%
 
 
 # Sonuç
-Çalışmama sorum yıllık gelirdeki farklılıkları etkileyen nedir ? Sorusu ile başlamıştım.Yıllık gelirdeki farklılıklara sebep olan birçok faktör var.Ben çalışmamın bu kısmında yaş ve yıllık gelir arasındaki bağı incelemeye çalıştım ve elde ettiğim sonuç bağlamında yaş ve yıllık gelir arasında doğru bir orantı yok.Yani yaş arttıkça deneyim ve gelir artar gibi bir sonuç elde edemeyiz.Bugün bile günümüz dünyasında çok genç ama çok yüksek gelire sahip iş insanları görüyoruz.Dolayısıyla yıllık gelirdeki farklılıklara sebep olan faktörlerden yaş benim çalımamda geliri çok etkileyen bir unsur değil.
+Bu bölümde çalışmanızın sonuçlarını özetleyiniz. Sonuçlarınızın başlangıçta belirlediğiniz araştırma sorusuna ne derece cevap verdiğini ve ileride bu çalışmanın nasıl geliştirilebileceğini tartışınız.
 
 **Kaynakça bölümü Rmarkdown tarafından otomatik olarak oluşturulmaktadır. Taslak dosyada Kaynakça kısmında herhangi bir değişikliğe gerek yoktur.** 
 

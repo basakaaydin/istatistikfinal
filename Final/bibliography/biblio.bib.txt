@@ -34,6 +34,5 @@
   number={2},
   pages={142--161},
   year={1991},
-  publisher={Wiley Online Library}
+  publisher={Wiley Online Library}
 }
-  
