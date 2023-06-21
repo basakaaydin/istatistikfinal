@@ -34,7 +34,7 @@
   number={2},
   pages={142--161},
   year={1991},
-  publisher={Wiley Online Library}
+  publisher={Wiley Online.Library}
 }
 @article{birdal2019tuketici,
   title={T{\"u}ketici Davran{\i}{\c{s}}lar{\i}nda Stat{\"u} Kayg{\i}s{\i} ve Sosyoekonomik Belirleyenleri},
