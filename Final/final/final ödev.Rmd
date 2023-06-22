@@ -113,8 +113,7 @@ varyanslarının eşit olması istenmektedir. ANOVA analizinde kullanılan F tes
 oluşturulur (Birdal Şenoğlu (2020)):
 
 $$
-𝐻0
-∶ 𝜇0 = 𝜇2 = 𝜇3 = … =  𝜇N
+H_0 : \mu_0 = \mu_2 = \mu_3 = … = \mu_N
 $$
 
 Bu denklem bize ortalamalar arasında fark olmadığını göstermektedir. 𝐻1
@@ -124,13 +123,17 @@ kareler toplamını, sapmaya yol açan etkileri ayırmak ve analiz etmektir. İk
 analizi modeli şu şekilde gösterilmektedir:
 
 $$
-𝑋𝑖𝑗𝑘 = 𝜇 + 𝛼𝑖 + 𝛽𝑗 + 𝛼𝛽𝑖𝑗 + 𝜖𝑖𝑗𝑘
-
+X_{ijk} = \mu + \alpha_{i} + \beta_{j} + \alpha \beta_{ij} + \epsilon_{ijk}
 $$
-Burada 𝜇, genel ortalamayı; 𝛼𝑖
-ilk faktör etkisini; 𝛽𝑗
-ikinci faktörün etkisini ve 𝛼𝛽𝑖𝑗 ortak
-etkiyi ifade ederken, 𝜖𝑖𝑗𝑘 hata terimini açıklamaktadır.
+Burada $\mu$, genel ortalamayı; $\alpha_{i}$ ilk faktör etkisini; $\beta_{j}$ ikinci faktörün etkisini ve $\alpha \beta_{ij}$ ortak etkiyi ifade ederken, $\epsilon_{ijk}$ hata terimini açıklamaktadır.
+
+
+```{r, include=FALSE}
+library(tidyverse)
+library(here)
+veri <- read_csv(here("C:/Users/basak/OneDrive/Masaüstü/21080560/Final/data/veri.csv"))
+```
+
 
 
 ```{r, echo=FALSE}
